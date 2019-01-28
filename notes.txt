@@ -1,0 +1,62 @@
+Visualization does not display formatting when using certain data.
+	reduced number of entries in list
+		threshold for imdb dataset is < 1519 lines with format displayed correctly
+	using <= 1519 entries
+		switched first and second halves of data	
+			formatting displays incorrectly
+		used only second half of data
+			formatting displays incorrectly
+
+	using == 1520 entries
+		deleted second half of data, duplicated first half to the same number of entries
+			formatting displays correctly
+		deleted first half of data, duplicated second half to the same number of entries
+			formatting displays incorrectly		
+			
+
+	using only second half of data
+		first half
+			displays correctly
+		second half
+			displays correctly
+			
+		1-399
+			displays correctly
+
+		399-908
+			displays correctly
+
+			
+	used 1519 entries (displayed correctly)
+		added one entry to list manually
+			displays incorrectly
+			
+
+may be related to # of unique nodes in the visualizer (browser specific?)
+
+	1519 entries from data file = 100 unique nodes (actor names), 1520 = 101 unique nodes. 
+	100 may be the maximum # of nodes the visualizer will display.
+		
+
+Entry added through command line will not display in visualizer
+	checked json being sent through Bridges set_visualize_JSON(True)
+		actor and movie name appear in Json sent to server
+		
+	called visualize, then added an entry to the list and called again
+		item does not appear
+		
+	removed first call to visualize then added an entry to the list and called again
+		item appears
+		
+	removed all calls to visualize, add one final call at the last line
+		entry added through command line appears in visualizer
+		
+only one call to visualize allowed?
+	unable to confirm in documentation for visualize method
+	
+	created new instance of bridges then called visualize, added new entry
+	then created another instance of bridges and called visualize again
+		entry appears in visualizer
+
+possibly only one call to visualize recognized per bridges instance
+		
