@@ -1,6 +1,6 @@
 ####
 # Date Created: 1.25.19
-# Date Modified: 1.28.19
+# Date Modified: 1.31.19
 # Author: Nick Leyson
 # 
 # This file contains: 
@@ -15,6 +15,9 @@ from bridges.sl_element import *
 
 
 class SList:
+    """ A single linked list with methods for working with the bridges IMBD dataset.
+        Internally all actor and movie names are stored with spaces represented as underscores.
+    """
 
     def __init__(self):
         self.size = 0
@@ -22,14 +25,13 @@ class SList:
         self.tail = None
         self.current = None
         self.highlighted = None
+        self.traversed_on_insert = 0
+
         self.default_node_color = "blue"
         self.current_node_color = "red"
         self.head_color = "orange"
         self.tail_color = "yellow"
         self.highlight_color = "green"
-        # self.bridges = Bridges(0, "nleyson", "134563925230")
-        # self.bridges.set_visualize_JSON(True)
-        self.traversed_on_insert = 0
 
     def push_front(self, value):
         """ Create a new node with the given value,
@@ -222,7 +224,7 @@ class SList:
             actor_node = self.insert(actor_film[0])
         actor_node.set_value(actor_node.get_value()+"\n"+actor_film[1].rstrip())
         # update the node label
-        actor_node.set_label(actor_node.get_value().replace("\n", "<br />").replace("_", " "))
+        actor_node.set_label(actor_node.get_value().replace("\n", "<br>").replace("_", " "))
 
     def to_str(self):
         """Generate a string representation of the object"""
@@ -240,7 +242,7 @@ class SList:
         if self.current is not None:
             self.current.get_visualizer().set_color(self.default_node_color)
         self.current = node
-        self.current.get_visualizer().set_color("red")
+        self.current.get_visualizer().set_color(self.current_node_color)
 
     def set_head(self, node):
         "Set the head node and reset visual properties if needed."
@@ -272,23 +274,19 @@ class SList:
 
 
 def main():
+    """Read in 95 actors and their movies"""
     li = SList()
-    # li.insert_film("Kevin_Bacon_(I) Animal_House_(1978)".split(' '))
-    # li.insert_film("Winona_Ryder Being_John_Malkovich_(1999)".split(' '))
-    # li.insert_film("Kevin_Bacon_(I) Air_Up_There,_The_(1994)".split(' '))
-    # li.insert_film("Christian_Bale Batman_Begins_(2005)".split(' '))
+
     # import raw actor data from the file
     with open("./dataset/large_imdb.txt", encoding="utf-8") as file:
         line = file.readline()
-        i = 0
-        while line and i < 1520:
-            line = file.readline()
+        while line and li.size <= 95:
             if line != "":
                 # print(line)
                 # print(line.split())
                 li.insert_film(line.split(' '))
-            i += 1
-    # print(li.to_str())
+            line = file.readline()
+
     print(li.size)
     # accept command line input to find, add, and remove an actor
     li.update_visual()
