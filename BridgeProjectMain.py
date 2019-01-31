@@ -7,6 +7,10 @@
 #    A singly linked list class utilizing the Bridges CS API
 #       The class implements methods for working with the Bridges IMBD dataset
 #    A main driver to edit the list through the command line and update the bridges visualizer
+#
+# Original assignment details: http://bridgesuncc.github.io/project_data/assignments/s15/1.pdf
+# Generated bridges visualization: http://bridges-cs.herokuapp.com/assignments/0/nleyson
+#
 ####
 
 
@@ -219,10 +223,12 @@ class SList:
             If the actor is in the list, append the film to their node's string.
             @actor_film (list): a tuple containing [ActorFirst_ActorLast, Film_Title]
         """
-        actor_node = self.find_actor(actor_film[0])
+        actor_name = actor_film[0].strip()
+        film_name = actor_film[1].strip()
+        actor_node = self.find_actor(actor_name)
         if actor_node is None:
-            actor_node = self.insert(actor_film[0])
-        actor_node.set_value(actor_node.get_value()+"\n"+actor_film[1].rstrip())
+            actor_node = self.insert(actor_name)
+        actor_node.set_value(actor_node.get_value()+"\n"+film_name)
         # update the node label
         actor_node.set_label(actor_node.get_value().replace("\n", "<br>").replace("_", " "))
 
@@ -269,6 +275,7 @@ class SList:
     def update_visual(self):
         bridges = Bridges(0, "nleyson", "134563925230")
         bridges.set_data_structure(self.head)
+        # Show the Json sent to the server
         bridges.set_visualize_JSON(True)
         bridges.visualize()
 
@@ -282,12 +289,9 @@ def main():
         line = file.readline()
         while line and li.size <= 95:
             if line != "":
-                # print(line)
-                # print(line.split())
                 li.insert_film(line.split(' '))
             line = file.readline()
 
-    print(li.size)
     # accept command line input to find, add, and remove an actor
     li.update_visual()
 
