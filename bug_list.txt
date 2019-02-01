@@ -36,7 +36,10 @@ may be related to # of unique nodes in the visualizer (browser specific?)
 
 	1519 entries from data file = 100 unique nodes (actor names), 1520 = 101 unique nodes. 
 	100 may be the maximum # of nodes the visualizer will display.
-		
+
+Solution: Program uses < 100 entries to maintain formatting
+
+Solution update: Use \n instead of html <br>. Works with < 100 entries, though with some formatting missing.
 
 Entry added through command line will not display in visualizer
 	checked json being sent through Bridges set_visualize_JSON(True)
@@ -60,3 +63,4 @@ only one call to visualize allowed?
 
 possibly only one call to visualize recognized per bridges instance
 		
+Solution: Program will create a new instance each time the visualizer is updated

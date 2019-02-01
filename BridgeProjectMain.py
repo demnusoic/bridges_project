@@ -230,7 +230,7 @@ class SList:
             actor_node = self.insert(actor_name)
         actor_node.set_value(actor_node.get_value()+"\n"+film_name)
         # update the node label
-        actor_node.set_label(actor_node.get_value().replace("\n", "<br>").replace("_", " "))
+        actor_node.set_label(actor_node.get_value().replace("\n", "\\n").replace("_", " "))
 
     def to_str(self):
         """Generate a string representation of the object"""
@@ -276,7 +276,7 @@ class SList:
         bridges = Bridges(0, "nleyson", "134563925230")
         bridges.set_data_structure(self.head)
         # Show the Json sent to the server
-        bridges.set_visualize_JSON(True)
+        # bridges.set_visualize_JSON(True)
         bridges.visualize()
 
 
@@ -287,7 +287,7 @@ def main():
     # import raw actor data from the file
     with open("./dataset/large_imdb.txt", encoding="utf-8") as file:
         line = file.readline()
-        while line and li.size <= 95:
+        while line:
             if line != "":
                 li.insert_film(line.split(' '))
             line = file.readline()
@@ -323,6 +323,8 @@ def main():
             else:
                 print("Actor Highlighted\n")
                 li.update_visual()
+        elif user_choice.capitalize() == "Exit":
+            pass
         else:
             print("Command not recognized\n")
 
