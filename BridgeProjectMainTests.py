@@ -18,6 +18,7 @@ class BridgeProjectMainTest(unittest.TestCase):
         li = BridgeProjectMain.SList()
 
     def test_push_front(self):
+        "It should add an item to the head of the list."
         li = BridgeProjectMain.SList()
         li.push_front("first")
         self.assertEqual(li.head.get_value(), "first")
@@ -30,6 +31,7 @@ class BridgeProjectMainTest(unittest.TestCase):
         self.assertEqual(li.tail.get_value(), "first")
 
     def test_push_back(self):
+        "It should add an item to the tail of the list."
         li = BridgeProjectMain.SList()
         li.push_back("first")
         self.assertEqual(li.head.get_value(), "first")
@@ -42,6 +44,7 @@ class BridgeProjectMainTest(unittest.TestCase):
         self.assertEqual(li.tail.get_value(), "third")
 
     def test_pop_back(self):
+        "It should remove an item from the tail of the list."
         li = BridgeProjectMain.SList()
         li.push_back("first")
         li.push_back("second")
@@ -60,6 +63,7 @@ class BridgeProjectMainTest(unittest.TestCase):
             li.pop_back()
 
     def test_pop_front(self):
+        "It should remove an item from the head of the list."
         li = BridgeProjectMain.SList()
         li.push_front("first")
         li.push_front("second")
@@ -78,6 +82,7 @@ class BridgeProjectMainTest(unittest.TestCase):
             li.pop_front()
 
     def test_get_prev(self):
+        "When given a node, it should return the previous node in the list."
         li = BridgeProjectMain.SList()
         li.push_front("first")
         li.push_front("second")
@@ -86,6 +91,7 @@ class BridgeProjectMainTest(unittest.TestCase):
         self.assertEqual(li.get_prev(li.head), None)
 
     def test_remove_node(self):
+        "When given a node, it should remove the node from the list."
         li = BridgeProjectMain.SList()
         li.push_back("first")
         li.push_back("second")
@@ -97,6 +103,7 @@ class BridgeProjectMainTest(unittest.TestCase):
         self.assertTrue(li.empty())
 
     def test_insert_after(self):
+        "It should insert a new node with the given value after the given node."
         li = BridgeProjectMain.SList()
         li.push_back("first")
         li.insert_after(li.head, "second")
@@ -109,6 +116,7 @@ class BridgeProjectMainTest(unittest.TestCase):
         self.assertEqual(li.head.get_next().get_value(), "second")
 
     def test_insert_before(self):
+        "It should insert a new node with the given value before the given node."
         li = BridgeProjectMain.SList()
         li.push_back("first")
         li.insert_before(li.head, "second")
@@ -170,7 +178,7 @@ class BridgeProjectMainTest(unittest.TestCase):
         self.assertFalse(removed)
 
     def test_to_str(self):
-        "I should return the value of each node separated by two new lines."
+        "It should return the value of each node separated by two new lines."
         li = BridgeProjectMain.SList()
         li.push_back("first")
         li.push_back("second")

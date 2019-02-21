@@ -1,6 +1,6 @@
 ####
 # Date Created: 1.25.19
-# Date Modified: 1.31.19
+# Date Modified: 2.6.19
 # Author: Nick Leyson
 # 
 # This file contains: 
@@ -281,7 +281,7 @@ class SList:
 
 
 def main():
-    """Read in 95 actors and their movies"""
+    """Read in the list of actors and their movies"""
     li = SList()
 
     # import raw actor data from the file
